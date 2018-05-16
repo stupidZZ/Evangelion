@@ -1,0 +1,38 @@
+---
+TORCH_VERSION: 'torch_v0.4.0_py2'
+OUTPUT_PATH: './output/classification/cifar'
+MODULE: resnet18_cifar10
+GPUS: '0,1,2,3,4,5,6,7'
+LOG_FREQUENT: 10
+RNG_SEED: 3
+MODEL_PREFIX: 'resnet18_cifar10'
+NUM_WORKER_PER_GPU: 4
+TRAIN:
+  SCALES: '[(32,32)]'
+  BATCH_IMAGES_PER_GPU: 256
+  LR: 0.1
+  LR_STEP: '200, 250'
+  WARMUP: false
+  WARMUP_LR: 0.00005
+  WARMUP_STEP: 1000
+  WARMUP_METHOD: 'constant'
+  MOMENTUM: 0.9
+  WD: 0.0005
+  BEGIN_EPOCH: 0
+  END_EPOCH: 300
+  # whether resume training
+  RESUME: false
+  # whether flip image
+  FLIP: true
+  # whether shuffle image
+  SHUFFLE: true
+TEST:
+  SCALES: '[(32,32)]'
+  BATCH_IMAGES_PER_GPU: 100
+  TEST_EPOCH: 200
+DATASET:
+  DATASET: 'Cifar10'
+  DATASET_PATH: './data/cifar-10-batches-py'
+  ROOT_PATH: './data'
+  TRAIN_IMAGE_SET: 'cifar10_train'
+  TEST_IMAGE_SET: 'cifar10_test'
